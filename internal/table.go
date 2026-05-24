@@ -18,7 +18,7 @@ var styleHiddenBorders = table.Style{
 		MiddleHorizontal: " ",
 		MiddleSeparator:  " ",
 		MiddleVertical:   " ",
-		PaddingLeft:      " ",
+		PaddingLeft:      "",
 		PaddingRight:     " ",
 		Right:            " ",
 		RightSeparator:   " ",
@@ -32,16 +32,14 @@ var styleHiddenBorders = table.Style{
 	},
 }
 
-var header = table.Row{"kind", "perm", "user", "group", "size", "modified", "name"}
-
 var sortByDirectoriesThenByName = []table.SortBy{
-	{Name: "kind", Mode: table.AscAlphaNumeric},
-	{Name: "name", Mode: table.AscAlphaNumeric},
+	{Number: 1, Mode: table.AscAlphaNumeric},
+	{Number: 7, Mode: table.AscAlphaNumeric},
 }
 
 var HideKindColumn = []table.ColumnConfig{
 	{
-		Name:   "kind",
+		Number: 1,
 		Hidden: true,
 	},
 }
@@ -64,7 +62,6 @@ func rowColor(row table.Row) text.Colors {
 func Newtable() table.Writer {
 	t := table.NewWriter()
 	t.SetStyle(styleHiddenBorders)
-	t.AppendHeader(header)
 	t.SortBy(sortByDirectoriesThenByName)
 	t.SetRowPainter(rowColor)
 	t.SetColumnConfigs(HideKindColumn)
